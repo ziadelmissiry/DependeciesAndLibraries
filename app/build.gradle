@@ -1,0 +1,43 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.example.dependeciesandlibraries'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.example.dependeciesandlibraries"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    //local library module dependency
+    implementation project(':app') // matches include in settings.gravel
+    //local binary dependency
+    implementation fileTree(dir: 'libs', includes: ['*.jar']) //declares dependencies on libs directory
+    implementation files('libs/foo.jar','libs/bar.jar') // you can specify specific files
+    //Remote binary dependency
+    implementation 'com.example.android:app-magic:12.3'// implementation for the group that go to android name app magic V12.3
+
+
+
+}
